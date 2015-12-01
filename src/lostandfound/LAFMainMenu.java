@@ -5,6 +5,14 @@
  */
 package lostandfound;
 
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author LIA
@@ -16,6 +24,15 @@ public class LAFMainMenu extends javax.swing.JFrame {
      */
     public LAFMainMenu() {
         initComponents();
+        runMethods();
+        
+    }
+    
+    public void runMethods(){
+        BarangController bc = new BarangController();
+        bc.start();
+        ResultSet isiTabel = bc.lihatBarangHilang();
+        barangHilangTable.setModel(DbUtils.resultSetToTableModel(isiTabel));
     }
 
     /**
@@ -29,19 +46,30 @@ public class LAFMainMenu extends javax.swing.JFrame {
 
         judulPanel = new javax.swing.JPanel();
         judulLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         barangHilangTable = new javax.swing.JTable();
+        topMenuPanel = new javax.swing.JPanel();
+        cariBarangPanel = new javax.swing.JPanel();
+        keywordBarangText = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        kategoriBarangBox = new javax.swing.JComboBox();
+        cariBarangButton = new javax.swing.JButton();
+        menuPanel = new javax.swing.JPanel();
+        lihatSemuaBarangButton = new javax.swing.JButton();
+        tambahBarangButton = new javax.swing.JButton();
+        ambilBarangButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         judulPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         judulPanel.setForeground(new java.awt.Color(204, 255, 153));
 
-        judulLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        judulLabel.setForeground(new java.awt.Color(255, 0, 51));
+        judulLabel.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        judulLabel.setForeground(new java.awt.Color(0, 153, 0));
         judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         judulLabel.setLabelFor(this);
-        judulLabel.setText("Sistem Informasi Lost and Found");
+        judulLabel.setText("Sistem Informasi -Lost and Found-");
         judulLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout judulPanelLayout = new javax.swing.GroupLayout(judulPanel);
@@ -61,39 +89,164 @@ public class LAFMainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        barangHilangTable.setAutoCreateRowSorter(true);
+        barangHilangTable.setBackground(new java.awt.Color(204, 255, 204));
+        barangHilangTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         barangHilangTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(barangHilangTable);
+        jScrollPane2.setViewportView(barangHilangTable);
+
+        jLabel1.setText("Cari Barang");
+
+        kategoriBarangBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategoriBarangBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategoriBarangBoxActionPerformed(evt);
+            }
+        });
+
+        cariBarangButton.setText("Cari");
+        cariBarangButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariBarangButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cariBarangPanelLayout = new javax.swing.GroupLayout(cariBarangPanel);
+        cariBarangPanel.setLayout(cariBarangPanelLayout);
+        cariBarangPanelLayout.setHorizontalGroup(
+            cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cariBarangPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(cariBarangPanelLayout.createSequentialGroup()
+                        .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kategoriBarangBox, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cariBarangButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        cariBarangPanelLayout.setVerticalGroup(
+            cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cariBarangPanelLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kategoriBarangBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cariBarangButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lihatSemuaBarangButton.setText("Lihat semua barang");
+        lihatSemuaBarangButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lihatSemuaBarangButtonActionPerformed(evt);
+            }
+        });
+
+        tambahBarangButton.setText("Tambah barang hilang");
+
+        ambilBarangButton.setText("Pengambilan barang");
+
+        jLabel2.setText("Menu ");
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(lihatSemuaBarangButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(tambahBarangButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ambilBarangButton)
+                        .addContainerGap(16, Short.MAX_VALUE))))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lihatSemuaBarangButton)
+                    .addComponent(tambahBarangButton)
+                    .addComponent(ambilBarangButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout topMenuPanelLayout = new javax.swing.GroupLayout(topMenuPanel);
+        topMenuPanel.setLayout(topMenuPanelLayout);
+        topMenuPanelLayout.setHorizontalGroup(
+            topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topMenuPanelLayout.createSequentialGroup()
+                .addComponent(cariBarangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        topMenuPanelLayout.setVerticalGroup(
+            topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topMenuPanelLayout.createSequentialGroup()
+                .addGroup(topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
-                    .addComponent(judulPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(judulPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(judulPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lihatSemuaBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatSemuaBarangButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lihatSemuaBarangButtonActionPerformed
+
+    private void cariBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariBarangButtonActionPerformed
+
+    private void kategoriBarangBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBarangBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategoriBarangBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +284,20 @@ public class LAFMainMenu extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ambilBarangButton;
     private javax.swing.JTable barangHilangTable;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton cariBarangButton;
+    private javax.swing.JPanel cariBarangPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel judulLabel;
     private javax.swing.JPanel judulPanel;
+    private javax.swing.JComboBox kategoriBarangBox;
+    private javax.swing.JTextField keywordBarangText;
+    private javax.swing.JButton lihatSemuaBarangButton;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton tambahBarangButton;
+    private javax.swing.JPanel topMenuPanel;
     // End of variables declaration//GEN-END:variables
 }
