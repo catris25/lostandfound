@@ -31,8 +31,8 @@ public class LAFMainMenu extends javax.swing.JFrame {
     public void runMethods(){
         BarangController bc = new BarangController();
         bc.start();
-        ResultSet isiTabel = bc.lihatBarangHilang();
-        barangHilangTable.setModel(DbUtils.resultSetToTableModel(isiTabel));
+        ResultSet dataBarang = bc.lihatBarangHilang();
+        barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
     }
 
     /**
@@ -157,6 +157,11 @@ public class LAFMainMenu extends javax.swing.JFrame {
         });
 
         tambahBarangButton.setText("Tambah barang hilang");
+        tambahBarangButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahBarangButtonActionPerformed(evt);
+            }
+        });
 
         ambilBarangButton.setText("Pengambilan barang");
 
@@ -247,6 +252,14 @@ public class LAFMainMenu extends javax.swing.JFrame {
     private void kategoriBarangBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBarangBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kategoriBarangBoxActionPerformed
+
+    private void tambahBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBarangButtonActionPerformed
+        // display the form to input barang
+        
+        TambahBarangMenu tambah = new TambahBarangMenu();
+        tambah.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_tambahBarangButtonActionPerformed
 
     /**
      * @param args the command line arguments

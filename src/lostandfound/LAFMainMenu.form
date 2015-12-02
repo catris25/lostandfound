@@ -275,6 +275,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tambah barang hilang"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahBarangButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ambilBarangButton">
               <Properties>
