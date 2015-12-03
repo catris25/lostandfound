@@ -33,6 +33,7 @@ public class LAFMainMenu extends javax.swing.JFrame {
         bc.start();
         ResultSet dataBarang = bc.lihatBarangHilang();
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
+        
     }
 
     /**

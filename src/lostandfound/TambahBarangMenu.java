@@ -51,21 +51,26 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         tambahBarangButton = new javax.swing.JButton();
         resetFormTambahButton = new javax.swing.JButton();
 
+        messageDialog.setBackground(new java.awt.Color(51, 204, 255));
+        messageDialog.setMaximumSize(new java.awt.Dimension(200, 300));
+        messageDialog.setPreferredSize(new java.awt.Dimension(200, 300));
+        messageDialog.setResizable(false);
+
+        messageNotifLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        messageNotifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout messageDialogLayout = new javax.swing.GroupLayout(messageDialog.getContentPane());
         messageDialog.getContentPane().setLayout(messageDialogLayout);
         messageDialogLayout.setHorizontalGroup(
             messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(messageDialogLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(messageNotifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+            .addComponent(messageNotifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
         messageDialogLayout.setVerticalGroup(
             messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(messageDialogLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messageDialogLayout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addComponent(messageNotifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(70, 70, 70))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -248,7 +253,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         );
         BarangInputFormPanelLayout.setVerticalGroup(
             BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
             .addComponent(BarangLabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -354,6 +359,9 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         
         System.out.println("message : "+message);
         messageDialog.setVisible(true);
+        messageDialog.setSize(200, 200);
+        messageDialog.setTitle("Notifikasi!");
+        messageDialog.setLocation(250, 250);
         messageNotifLabel.setText(message);
         
     }//GEN-LAST:event_tambahBarangButtonActionPerformed

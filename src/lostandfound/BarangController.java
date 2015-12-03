@@ -27,24 +27,21 @@ public class BarangController {
     
     public String tambahBarang(String namaBarang, String jenisBarang, String tglDitemukan, String ket, String namaPenemu, String noKtp, String noTelepon){
         String message;
-        System.out.println("masuk fungsi ni..");
+        
         try{
-            System.out.println("why");
-            //the error is below here
+            start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"' , '"+ "jenisBarang"+"' , '" +tglDitemukan +"' , '"+ 
+            String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"', '"+jenisBarang+"' , to_date('" +tglDitemukan +"', 'MM/DD/YYYY') , '"+ 
                     ket+"' , '"+ namaPenemu+"' , '"+ noKtp +"' , '"+ noTelepon+"')";
-            System.out.println("query : "+query);
-            //sqlResult = sqlQuery.executeQuery(query);
+            
             sqlQuery.executeQuery(query);
-            //System.out.println("query : "+ query);
-            System.out.println("result : "+ sqlResult.toString());
         }catch(SQLException ex){
-            message = "Maaf data tidak berhasil diinput dengan benar."+ex.toString();
+            message = "Maaf data gagal diinput!";
             System.out.println("message : "+message);
             return message;
         }
-        //connect.disconnect();
+        
+        connect.disconnect();
         message = "Data berhasil diinput!";
         return message;
         
@@ -55,6 +52,7 @@ public class BarangController {
     }
     
     public ResultSet lihatBarangHilang(){
+        
         try {
             sqlQuery = connect.getConnection().createStatement();
             String query = "select * from barang";
