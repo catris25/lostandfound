@@ -138,7 +138,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
             }
         });
 
-        jenisBarangComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang Elektronik", "Tas dan sejenisnya", "Buku dan sejenisnya", "Lainnya" }));
+        jenisBarangComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang elektronik", "Makanan/minuman", "Perhiasan/aksesoris", "Buku/ATK", "Pakaian/garmen", "Tas/dompet", "Dokumen", "Kunci", "Lainnya" }));
         jenisBarangComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangComboBoxActionPerformed(evt);

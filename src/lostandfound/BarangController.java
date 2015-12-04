@@ -65,11 +65,18 @@ public class BarangController {
         return sqlResult;
     }
     
-    public ResultSet cariBarangHilang(String keyword){
+    public ResultSet cariBarangHilang(String keyword, String kategori){
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "select * from barang where nama_barang='"+keyword+"'";
+            String query;
+            System.out.println("keyword = "+keyword+" kategori = "+kategori);
+            if(keyword.isEmpty()){
+                query = "select * from barang where jenis_barang='"+kategori+"'";
+            }else{
+                query = "select * from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"'";
+            }
+            System.out.println("query = "+query);
             sqlResult = sqlQuery.executeQuery(query);
             
         }catch(SQLException ex){

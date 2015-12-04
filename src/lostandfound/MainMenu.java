@@ -107,7 +107,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel1.setText("Cari Barang");
 
-        kategoriBarangBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategoriBarangBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang elektronik", "Makanan/minuman", "Perhiasan/aksesoris", "Buku/ATK", "Pakaian/garmen", "Tas/dompet", "Dokumen", "Kunci", "Lainnya" }));
         kategoriBarangBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kategoriBarangBoxActionPerformed(evt);
@@ -247,9 +247,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void cariBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangButtonActionPerformed
         String keyword = keywordBarangText.getText();
-        System.out.println("keyword "+keyword);
+        String kategori = kategoriBarangBox.getSelectedItem().toString();
+        
+        System.out.println("keyword "+keyword+"/ncategory"+kategori);
         bc = new BarangController();
-        ResultSet hasilPencarian = bc.cariBarangHilang(keyword);
+        ResultSet hasilPencarian = bc.cariBarangHilang(keyword, kategori);
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(hasilPencarian));
     }//GEN-LAST:event_cariBarangButtonActionPerformed
 
