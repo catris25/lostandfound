@@ -7,7 +7,7 @@ package lostandfound;
 public class LAFMain {
 
     public static void main(String[] args) {
-        LAFMainMenu runMenu = new LAFMainMenu();
+        MainMenu runMenu = new MainMenu();
         runMenu.main(args);
     }
     

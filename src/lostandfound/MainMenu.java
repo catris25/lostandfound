@@ -5,31 +5,30 @@
  */
 package lostandfound;
 
-import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
  * @author LIA
  */
-public class LAFMainMenu extends javax.swing.JFrame {
+public class MainMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form LAFMainMenu
      */
-    public LAFMainMenu() {
+    BarangController bc; 
+    
+    public MainMenu() {
         initComponents();
         runMethods();
         
     }
     
     public void runMethods(){
-        BarangController bc = new BarangController();
+        bc = new BarangController();
         bc.start();
         ResultSet dataBarang = bc.lihatBarangHilang();
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
@@ -91,7 +90,7 @@ public class LAFMainMenu extends javax.swing.JFrame {
         );
 
         barangHilangTable.setAutoCreateRowSorter(true);
-        barangHilangTable.setBackground(new java.awt.Color(204, 255, 204));
+        barangHilangTable.setBackground(new java.awt.Color(204, 204, 255));
         barangHilangTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         barangHilangTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,7 +246,11 @@ public class LAFMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lihatSemuaBarangButtonActionPerformed
 
     private void cariBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangButtonActionPerformed
-        // TODO add your handling code here:
+        String keyword = keywordBarangText.getText();
+        System.out.println("keyword "+keyword);
+        bc = new BarangController();
+        ResultSet hasilPencarian = bc.cariBarangHilang(keyword);
+        barangHilangTable.setModel(DbUtils.resultSetToTableModel(hasilPencarian));
     }//GEN-LAST:event_cariBarangButtonActionPerformed
 
     private void kategoriBarangBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBarangBoxActionPerformed
@@ -279,20 +282,21 @@ public class LAFMainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LAFMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LAFMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LAFMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LAFMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LAFMainMenu().setVisible(true);
+                new MainMenu().setVisible(true);
             }
         });
     }

@@ -65,6 +65,21 @@ public class BarangController {
         return sqlResult;
     }
     
+    public ResultSet cariBarangHilang(String keyword){
+        try{
+            start();
+            sqlQuery = connect.getConnection().createStatement();
+            String query = "select * from barang where nama_barang='"+keyword+"'";
+            sqlResult = sqlQuery.executeQuery(query);
+            
+        }catch(SQLException ex){
+            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        //connect.disconnect();
+        return sqlResult;
+    }
+    
     public void lihatSemuaBarang(){
         
     }

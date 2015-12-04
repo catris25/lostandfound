@@ -52,8 +52,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         resetFormTambahButton = new javax.swing.JButton();
 
         messageDialog.setBackground(new java.awt.Color(51, 204, 255));
-        messageDialog.setMaximumSize(new java.awt.Dimension(200, 300));
-        messageDialog.setPreferredSize(new java.awt.Dimension(200, 300));
         messageDialog.setResizable(false);
 
         messageNotifLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -125,9 +123,9 @@ public class TambahBarangMenu extends javax.swing.JFrame {
             .addGroup(InputFormLabelPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
@@ -253,7 +251,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         );
         BarangInputFormPanelLayout.setVerticalGroup(
             BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, Short.MAX_VALUE)
             .addComponent(BarangLabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
