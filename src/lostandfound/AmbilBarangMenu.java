@@ -1,5 +1,8 @@
 package lostandfound;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author LIA
@@ -14,8 +17,12 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
      */
     public AmbilBarangMenu(String id) {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         IDBarangTextField.setEditable(false);
+        
         IDBarangTextField.setText(id);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         this.id = id;
     }
@@ -50,7 +57,8 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         noTeleponTextField = new javax.swing.JTextField();
         ambilBarangButton = new javax.swing.JButton();
 
-        messageNotifLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        messageNotifLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        messageNotifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout messageDialogLayout = new javax.swing.GroupLayout(messageDialog.getContentPane());
         messageDialog.getContentPane().setLayout(messageDialogLayout);
@@ -104,9 +112,8 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(IDBarangLabel)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(NamaLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
@@ -173,9 +180,8 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(IDBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(IDBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(noKtpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,7 +191,7 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
                 .addComponent(alamatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(noTeleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -199,8 +205,11 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bodyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         ambilBarangButton.setText("Submit");
@@ -263,8 +272,9 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         
         messageDialog.setVisible(true);
         messageDialog.setSize(300, 200);
+        messageDialog.setResizable(false);
         messageDialog.setTitle("Notifikasi!");
-        messageDialog.setLocation(250, 250);
+        messageDialog.setLocationRelativeTo(null);
         messageNotifLabel.setText(message);
         
         

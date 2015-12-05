@@ -111,6 +111,7 @@ public class BarangController {
         boolean found=false;
         try{
             start();
+            //Only God knows what the code below means...
             sqlQuery = connect.getConnection().createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY

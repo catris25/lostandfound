@@ -1,5 +1,13 @@
 package lostandfound;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
+
+
+
 /**
  *
  * @author LIA
@@ -11,6 +19,13 @@ public class TambahBarangMenu extends javax.swing.JFrame {
     
     public TambahBarangMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        MainMenu mm = new MainMenu();
+        mm.setAlwaysOnTop(true);
+        
+        
     }
 
     /**
@@ -54,7 +69,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         messageDialog.setBackground(new java.awt.Color(51, 204, 255));
         messageDialog.setResizable(false);
 
-        messageNotifLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        messageNotifLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         messageNotifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout messageDialogLayout = new javax.swing.GroupLayout(messageDialog.getContentPane());
@@ -72,6 +87,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Form Tambah Barang Hilang");
 
         judul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         judul.setText("Form laporan barang hilang");
@@ -251,7 +267,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         );
         BarangInputFormPanelLayout.setVerticalGroup(
             BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, Short.MAX_VALUE)
+            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
             .addComponent(BarangLabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -357,9 +373,11 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         
         System.out.println("message : "+message);
         messageDialog.setVisible(true);
-        messageDialog.setSize(200, 200);
+        messageDialog.setSize(300, 200);
+        messageDialog.setResizable(false);
         messageDialog.setTitle("Notifikasi!");
-        messageDialog.setLocation(250, 250);
+        
+        messageDialog.setLocationRelativeTo(null);
         messageNotifLabel.setText(message);
         
     }//GEN-LAST:event_tambahBarangButtonActionPerformed
@@ -372,41 +390,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangComboBoxActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TambahBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TambahBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TambahBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TambahBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new TambahBarangMenu().setVisible(true);
-//            }
-//        });
-//    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarangFieldPanel;
     private javax.swing.JPanel BarangInputFormPanel;

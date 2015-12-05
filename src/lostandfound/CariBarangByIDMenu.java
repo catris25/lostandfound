@@ -13,6 +13,8 @@ public class CariBarangByIDMenu extends javax.swing.JFrame {
      */
     public CariBarangByIDMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

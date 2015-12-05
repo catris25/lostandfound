@@ -5,6 +5,8 @@
  */
 package lostandfound;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
@@ -25,10 +27,24 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         runMethods();
-        
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        //close confirmation dialog
+        this.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent we){
+             if(JOptionPane.showConfirmDialog(null, 
+                     "Anda yakin akan keluar dari aplikasi ini?", "Konfirmasi",
+                     JOptionPane.YES_NO_OPTION,
+                     JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
+                System.exit(0);
+             }   
+            }
+        });
     }
     
     public void runMethods(){
+        System.out.println("this method is RUNNING...");
+        this.setLocationRelativeTo(null);
         bc = new BarangController();
         bc.start();
         ResultSet dataBarang = bc.lihatBarangHilang();
@@ -45,7 +61,7 @@ public class MainMenu extends javax.swing.JFrame {
         barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
         
-        //barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
+        
     }
 
     /**
@@ -72,15 +88,17 @@ public class MainMenu extends javax.swing.JFrame {
         tambahBarangButton = new javax.swing.JButton();
         ambilBarangButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        refreshButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Lost and Found");
         setBackground(new java.awt.Color(255, 255, 255));
 
         judulPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         judulPanel.setForeground(new java.awt.Color(204, 255, 153));
 
-        judulLabel.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
-        judulLabel.setForeground(new java.awt.Color(0, 153, 0));
+        judulLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        judulLabel.setForeground(new java.awt.Color(0, 153, 153));
         judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         judulLabel.setLabelFor(this);
         judulLabel.setText("Sistem Informasi -Lost and Found-");
@@ -140,15 +158,14 @@ public class MainMenu extends javax.swing.JFrame {
         cariBarangPanelLayout.setHorizontalGroup(
             cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cariBarangPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(cariBarangPanelLayout.createSequentialGroup()
-                        .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kategoriBarangBox, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cariBarangButton)))
+                        .addComponent(cariBarangButton))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cariBarangPanelLayout.setVerticalGroup(
@@ -186,6 +203,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Menu ");
 
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -197,11 +221,16 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(lihatSemuaBarangButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(tambahBarangButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ambilBarangButton)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(refreshButton))
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addComponent(lihatSemuaBarangButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                                .addComponent(tambahBarangButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ambilBarangButton)))
                         .addContainerGap(16, Short.MAX_VALUE))))
         );
         menuPanelLayout.setVerticalGroup(
@@ -213,6 +242,8 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(lihatSemuaBarangButton)
                     .addComponent(tambahBarangButton)
                     .addComponent(ambilBarangButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -227,11 +258,8 @@ public class MainMenu extends javax.swing.JFrame {
         );
         topMenuPanelLayout.setVerticalGroup(
             topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topMenuPanelLayout.createSequentialGroup()
-                .addGroup(topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,8 +270,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(judulPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(topMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)))
+                    .addComponent(topMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +281,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -295,16 +323,22 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void tambahBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBarangButtonActionPerformed
         // display the form to input barang
-        
+        //this.setEnabled(false);
         TambahBarangMenu tambah = new TambahBarangMenu();
         tambah.setVisible(true);
-        this.setEnabled(false);
+        
     }//GEN-LAST:event_tambahBarangButtonActionPerformed
 
     private void ambilBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambilBarangButtonActionPerformed
+       
+        //this.setEnabled(false);
         CariBarangByIDMenu cari = new CariBarangByIDMenu();
         cari.setVisible(true);
     }//GEN-LAST:event_ambilBarangButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        runMethods();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,6 +390,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField keywordBarangText;
     private javax.swing.JButton lihatSemuaBarangButton;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JButton tambahBarangButton;
     private javax.swing.JPanel topMenuPanel;
     // End of variables declaration//GEN-END:variables
