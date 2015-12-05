@@ -25,9 +25,9 @@ public class BarangController {
     }
     
     
-    public String tambahBarang(String namaBarang, String jenisBarang, String tglDitemukan, String ket, String namaPenemu, String noKtp, String noTelepon){
+    public boolean tambahBarang(String namaBarang, String jenisBarang, String tglDitemukan, String ket, String namaPenemu, String noKtp, String noTelepon){
         String message;
-        
+        boolean success;
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
@@ -36,20 +36,22 @@ public class BarangController {
             
             sqlQuery.executeQuery(query);
         }catch(SQLException ex){
-            message = "Maaf data gagal diinput!";
+            message = "Maaf data gagal diinput! "+ex.toString();
+            success= false;
             System.out.println("message : "+message);
-            return message;
+            return success;
         }
         
         connect.disconnect();
         message = "Data berhasil diinput!";
-        return message;
+        success = true;
+        return success;
         
     }
     
-    public String ambilBarang(String nama, String noKtp, String tglMengambil, String noTelepon, String alamat, String idBarang){
+    public boolean ambilBarang(String nama, String noKtp, String tglMengambil, String noTelepon, String alamat, String idBarang){
         String message;
-        
+        boolean success;
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
@@ -60,15 +62,17 @@ public class BarangController {
             query = "update Barang set status_pengambilan="+1+" where id_barang="+idBarang;
             System.out.println("query 2 : "+query);
             sqlQuery.executeQuery(query);
+            success=true;
         }catch(SQLException e){
             message = "Maaf data gagal diinput!";
             System.out.println("message : "+message);
-            return message;
+            success =false;
+            return false;
         }
         
         connect.disconnect();
         message = "Data berhasil diinput!";
-        return message;
+        return success;
     }
     
     public ResultSet lihatBarangHilang(){

@@ -2,6 +2,11 @@ package lostandfound;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -36,8 +41,6 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        messageDialog = new javax.swing.JDialog();
-        messageNotifLabel = new javax.swing.JLabel();
         judulPanel = new javax.swing.JPanel();
         judulLabel = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
@@ -56,23 +59,6 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         alamatTextField = new javax.swing.JTextField();
         noTeleponTextField = new javax.swing.JTextField();
         ambilBarangButton = new javax.swing.JButton();
-
-        messageNotifLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        messageNotifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout messageDialogLayout = new javax.swing.GroupLayout(messageDialog.getContentPane());
-        messageDialog.getContentPane().setLayout(messageDialogLayout);
-        messageDialogLayout.setHorizontalGroup(
-            messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(messageNotifLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-        );
-        messageDialogLayout.setVerticalGroup(
-            messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(messageDialogLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(messageNotifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -268,16 +254,14 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
         String idBarang = this.id;
         
         BarangController bc = new BarangController();
-        String message = bc.ambilBarang(nama, noKtp, tgl_mengambil, noTelepon, alamat, idBarang);
+        boolean success = bc.ambilBarang(nama, noKtp, tgl_mengambil, noTelepon, alamat, idBarang);
         
-        messageDialog.setVisible(true);
-        messageDialog.setSize(300, 200);
-        messageDialog.setResizable(false);
-        messageDialog.setTitle("Notifikasi!");
-        messageDialog.setLocationRelativeTo(null);
-        messageNotifLabel.setText(message);
-        
-        
+        if(success){
+            JOptionPane.showMessageDialog(null, "Data berhasil diinput!", "Pesan", INFORMATION_MESSAGE);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Maaf, data gagal diinput!", "Pesan", WARNING_MESSAGE);
+        }
         
     }//GEN-LAST:event_ambilBarangButtonActionPerformed
 
@@ -351,8 +335,6 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel judulLabel;
     private javax.swing.JPanel judulPanel;
-    private javax.swing.JDialog messageDialog;
-    private javax.swing.JLabel messageNotifLabel;
     private javax.swing.JTextField namaTextField;
     private javax.swing.JTextField noKtpTextField;
     private javax.swing.JTextField noTeleponTextField;

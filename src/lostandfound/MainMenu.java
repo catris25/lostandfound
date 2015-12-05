@@ -7,11 +7,9 @@ package lostandfound;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -323,7 +321,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void tambahBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBarangButtonActionPerformed
         // display the form to input barang
-        //this.setEnabled(false);
+
         TambahBarangMenu tambah = new TambahBarangMenu();
         tambah.setVisible(true);
         

@@ -3,6 +3,8 @@ package lostandfound;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 
@@ -37,8 +39,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        messageDialog = new javax.swing.JDialog();
-        messageNotifLabel = new javax.swing.JLabel();
         judulPanel = new javax.swing.JPanel();
         judul = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
@@ -65,26 +65,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         namaPenemuTextField = new javax.swing.JTextField();
         tambahBarangButton = new javax.swing.JButton();
         resetFormTambahButton = new javax.swing.JButton();
-
-        messageDialog.setBackground(new java.awt.Color(51, 204, 255));
-        messageDialog.setResizable(false);
-
-        messageNotifLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        messageNotifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout messageDialogLayout = new javax.swing.GroupLayout(messageDialog.getContentPane());
-        messageDialog.getContentPane().setLayout(messageDialogLayout);
-        messageDialogLayout.setHorizontalGroup(
-            messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(messageNotifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-        );
-        messageDialogLayout.setVerticalGroup(
-            messageDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messageDialogLayout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addComponent(messageNotifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Tambah Barang Hilang");
@@ -267,7 +247,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         );
         BarangInputFormPanelLayout.setVerticalGroup(
             BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+            .addComponent(BarangFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, Short.MAX_VALUE)
             .addComponent(BarangLabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -368,17 +348,17 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         String namaPenemu = namaPenemuTextField.getText();
         String noKtp = noKtpTextField.getText();
         String noTelepon = noTeleponTextField.getText();
-        //System.out.println("data : "+ namaBarang + jenisBarang + tglDitemukan + ket + namaPenemu +noKtp + noTelepon);
-        String message = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
-        System.out.println("message : "+message);
-        messageDialog.setVisible(true);
-        messageDialog.setSize(300, 200);
-        messageDialog.setResizable(false);
-        messageDialog.setTitle("Notifikasi!");
+        boolean success = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
-        messageDialog.setLocationRelativeTo(null);
-        messageNotifLabel.setText(message);
+        if(success){
+            JOptionPane.showMessageDialog(null, "Data berhasil diinput!", "Pesan", INFORMATION_MESSAGE);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Maaf, data gagal diinput!", "Pesan", WARNING_MESSAGE);
+        }
+        
+        
         
     }//GEN-LAST:event_tambahBarangButtonActionPerformed
 
@@ -411,8 +391,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
     private javax.swing.JLabel judul;
     private javax.swing.JPanel judulPanel;
     private javax.swing.JTextArea keteranganTextArea;
-    private javax.swing.JDialog messageDialog;
-    private javax.swing.JLabel messageNotifLabel;
     private javax.swing.JTextField namaBarangTextField;
     private javax.swing.JTextField namaPenemuTextField;
     private javax.swing.JTextField noKtpTextField;
