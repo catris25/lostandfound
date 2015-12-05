@@ -36,7 +36,6 @@ public class MainMenu extends javax.swing.JFrame {
         
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
         
-        //TableColumn tc1 = new TableColumn();
         barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
@@ -45,8 +44,8 @@ public class MainMenu extends javax.swing.JFrame {
         barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
         
+        //barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
     }
 
     /**
@@ -262,7 +261,22 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lihatSemuaBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatSemuaBarangButtonActionPerformed
-        // TODO add your handling code here:
+        bc = new BarangController();
+        bc.start();
+        ResultSet dataBarang = bc.lihatSemuaBarang();
+        barangHilangTable.setEnabled(false);
+        
+        barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
+        
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Tgl ditemukan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(4).setHeaderValue("Keterangan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
     }//GEN-LAST:event_lihatSemuaBarangButtonActionPerformed
 
     private void cariBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangButtonActionPerformed

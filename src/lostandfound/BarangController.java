@@ -53,13 +53,12 @@ public class BarangController {
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "insert into values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'MM/DD/YYYY'),'"
+            String query = "insert into pemilik values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'MM/DD/YYYY'),'"
                     +noTelepon+"','"+alamat+"',"+idBarang+")";
             System.out.println("query 1 : "+query);
             sqlQuery.executeQuery(query);
             query = "update Barang set status_pengambilan="+1+" where id_barang="+idBarang;
             System.out.println("query 2 : "+query);
-            
             sqlQuery.executeQuery(query);
         }catch(SQLException e){
             message = "Maaf data gagal diinput!";
@@ -76,13 +75,14 @@ public class BarangController {
         
         try {
             sqlQuery = connect.getConnection().createStatement();
-            String query = "select * from barang";
+            String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
+                    + "from barang where status_pengambilan=0";
             sqlResult = sqlQuery.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        //connect.disconnect();
+     
         return sqlResult;
     }
     
@@ -108,21 +108,39 @@ public class BarangController {
     }
     
     public boolean cariBarangByID(String id){
-        boolean success=false;
+        boolean found=false;
         try{
             start();
-            sqlQuery = connect.getConnection().createStatement();
-            String query = "select * from barang where id_barang='"+id+"'";
+            sqlQuery = connect.getConnection().createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY
+            );
+            String query = "select * from barang where id_barang="+id;
             sqlResult = sqlQuery.executeQuery(query);
-            success = true;
+            sqlResult.last();
+            int row = sqlResult.getRow();
+            sqlResult.beforeFirst();
+            System.out.println("number of rows = "+row);
+            if(row==1){
+                found=true;
+            }
         }catch(SQLException e){
             System.out.println("cari barang failed, error message "+e.toString());
-            success = false;
+            found = false;
         }
-        return success;
+        return found;
     }
     
-    public void lihatSemuaBarang(){
-        
+    public ResultSet lihatSemuaBarang(){
+        try {
+            sqlQuery = connect.getConnection().createStatement();
+            String query = "select * from barang";
+            sqlResult = sqlQuery.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+     
+        return sqlResult;
     }
 }
