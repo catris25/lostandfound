@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,7 +32,20 @@ public class MainMenu extends javax.swing.JFrame {
         bc = new BarangController();
         bc.start();
         ResultSet dataBarang = bc.lihatBarangHilang();
+        barangHilangTable.setEnabled(false);
+        
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
+        
+        //TableColumn tc1 = new TableColumn();
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Tgl ditemukan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(4).setHeaderValue("Keterangan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
         
     }
 
@@ -61,6 +75,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         judulPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         judulPanel.setForeground(new java.awt.Color(204, 255, 153));
@@ -164,6 +179,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         ambilBarangButton.setText("Pengambilan barang");
+        ambilBarangButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ambilBarangButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Menu ");
 
@@ -266,6 +286,11 @@ public class MainMenu extends javax.swing.JFrame {
         tambah.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_tambahBarangButtonActionPerformed
+
+    private void ambilBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambilBarangButtonActionPerformed
+        CariBarangByIDMenu cari = new CariBarangByIDMenu();
+        cari.setVisible(true);
+    }//GEN-LAST:event_ambilBarangButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -32,7 +32,7 @@ public class BarangController {
             start();
             sqlQuery = connect.getConnection().createStatement();
             String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"', '"+jenisBarang+"' , to_date('" +tglDitemukan +"', 'MM/DD/YYYY') , '"+ 
-                    ket+"' , '"+ namaPenemu+"' , '"+ noKtp +"' , '"+ noTelepon+"')";
+                    ket+"' , '"+ namaPenemu+"' , '"+ noKtp +"' , '"+ noTelepon+"',"+0+")";
             
             sqlQuery.executeQuery(query);
         }catch(SQLException ex){
@@ -47,8 +47,29 @@ public class BarangController {
         
     }
     
-    public void ambilBarang(){
+    public String ambilBarang(String nama, String noKtp, String tglMengambil, String noTelepon, String alamat, String idBarang){
+        String message;
         
+        try{
+            start();
+            sqlQuery = connect.getConnection().createStatement();
+            String query = "insert into values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'MM/DD/YYYY'),'"
+                    +noTelepon+"','"+alamat+"',"+idBarang+")";
+            System.out.println("query 1 : "+query);
+            sqlQuery.executeQuery(query);
+            query = "update Barang set status_pengambilan="+1+" where id_barang="+idBarang;
+            System.out.println("query 2 : "+query);
+            
+            sqlQuery.executeQuery(query);
+        }catch(SQLException e){
+            message = "Maaf data gagal diinput!";
+            System.out.println("message : "+message);
+            return message;
+        }
+        
+        connect.disconnect();
+        message = "Data berhasil diinput!";
+        return message;
     }
     
     public ResultSet lihatBarangHilang(){
@@ -70,7 +91,6 @@ public class BarangController {
             start();
             sqlQuery = connect.getConnection().createStatement();
             String query;
-            System.out.println("keyword = "+keyword+" kategori = "+kategori);
             if(keyword.isEmpty()){
                 query = "select * from barang where jenis_barang='"+kategori+"'";
             }else{
@@ -85,6 +105,21 @@ public class BarangController {
         }
         //connect.disconnect();
         return sqlResult;
+    }
+    
+    public boolean cariBarangByID(String id){
+        boolean success=false;
+        try{
+            start();
+            sqlQuery = connect.getConnection().createStatement();
+            String query = "select * from barang where id_barang='"+id+"'";
+            sqlResult = sqlQuery.executeQuery(query);
+            success = true;
+        }catch(SQLException e){
+            System.out.println("cari barang failed, error message "+e.toString());
+            success = false;
+        }
+        return success;
     }
     
     public void lihatSemuaBarang(){
