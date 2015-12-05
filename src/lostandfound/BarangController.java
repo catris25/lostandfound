@@ -108,18 +108,18 @@ public class BarangController {
     }
     
     public boolean cariBarangByID(String id){
-        boolean found=false;
+        boolean success=false;
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
             String query = "select * from barang where id_barang='"+id+"'";
             sqlResult = sqlQuery.executeQuery(query);
-            found = true;
+            success = true;
         }catch(SQLException e){
             System.out.println("cari barang failed, error message "+e.toString());
-            found = false;
+            success = false;
         }
-        return found;
+        return success;
     }
     
     public void lihatSemuaBarang(){
