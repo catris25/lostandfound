@@ -31,9 +31,10 @@ public class BarangController {
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"', '"+jenisBarang+"' , to_date('" +tglDitemukan +"', 'MM/DD/YYYY') , '"+ 
+            String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"', '"+jenisBarang+
+                    "' , to_date('" +tglDitemukan +"', 'yyyy-MM-dd') , '"+ 
                     ket+"' , '"+ namaPenemu+"' , '"+ noKtp +"' , '"+ noTelepon+"',"+0+")";
-            
+            System.out.println("query input "+query);
             sqlQuery.executeQuery(query);
         }catch(SQLException ex){
             message = "Maaf data gagal diinput! "+ex.toString();
@@ -55,7 +56,7 @@ public class BarangController {
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "insert into pemilik values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'MM/DD/YYYY'),'"
+            String query = "insert into pemilik values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'yyyy-MM-dd'),'"
                     +noTelepon+"','"+alamat+"',"+idBarang+")";
             System.out.println("query 1 : "+query);
             sqlQuery.executeQuery(query);
@@ -96,9 +97,11 @@ public class BarangController {
             sqlQuery = connect.getConnection().createStatement();
             String query;
             if(keyword.isEmpty()){
-                query = "select * from barang where jenis_barang='"+kategori+"'";
+                query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
+                        + "from barang where jenis_barang='"+kategori+"'";
             }else{
-                query = "select * from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"'";
+                query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
+                        + "from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"'";
             }
             System.out.println("query = "+query);
             sqlResult = sqlQuery.executeQuery(query);

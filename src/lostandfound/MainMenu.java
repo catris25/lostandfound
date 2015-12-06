@@ -10,6 +10,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -59,7 +61,10 @@ public class MainMenu extends javax.swing.JFrame {
         barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
         
-        
+        //barangHilangTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        TableColumnModel tcm = barangHilangTable.getColumnModel();
+        TableColumn tc = tcm.getColumn(1);
+        tc.setWidth(tc.getWidth()+25);
     }
 
     /**
@@ -313,6 +318,16 @@ public class MainMenu extends javax.swing.JFrame {
         bc = new BarangController();
         ResultSet hasilPencarian = bc.cariBarangHilang(keyword, kategori);
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(hasilPencarian));
+        
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Tgl ditemukan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(4).setHeaderValue("Keterangan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
+        
     }//GEN-LAST:event_cariBarangButtonActionPerformed
 
     private void kategoriBarangBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBarangBoxActionPerformed
