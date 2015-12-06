@@ -4,10 +4,14 @@ import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import static java.util.Calendar.DAY_OF_MONTH;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
@@ -46,13 +50,14 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
+        
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         
         datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        tglDitemukanTextField.add(datePicker);                
+        tglDitemukanTextField.add(datePicker);          
         
     }
     
@@ -109,6 +114,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         noKtpTextField = new javax.swing.JTextField();
         noTeleponTextField = new javax.swing.JTextField();
         tambahBarangButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Tambah Barang Hilang");
@@ -156,11 +162,11 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         keteranganTextArea.setRows(5);
         jScrollPane1.setViewportView(keteranganTextArea);
 
-        jLabel1.setText("Nama barang");
+        jLabel1.setText("Nama barang*");
 
-        jLabel2.setText("Jenis barang");
+        jLabel2.setText("Jenis barang*");
 
-        jLabel3.setText("Tanggal ditemukan");
+        jLabel3.setText("Tanggal ditemukan*");
 
         jLabel4.setText("Keterangan");
 
@@ -184,11 +190,10 @@ public class TambahBarangMenu extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(namaBarangTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jenisBarangComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tglDitemukanTextField))
+                    .addComponent(namaBarangTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jenisBarangComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglDitemukanTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         InputFormFieldPanelLayout.setVerticalGroup(
@@ -215,7 +220,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
 
         BarangInputFormPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Penemu"));
 
-        jLabel5.setText("Nama penemu");
+        jLabel5.setText("Nama penemu*");
 
         jLabel6.setText("No KTP");
 
@@ -278,12 +283,16 @@ public class TambahBarangMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("* kolom harap diisi");
+
         javax.swing.GroupLayout inputFormPanelLayout = new javax.swing.GroupLayout(inputFormPanel);
         inputFormPanel.setLayout(inputFormPanelLayout);
         inputFormPanelLayout.setHorizontalGroup(
             inputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputFormPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tambahBarangButton)
                 .addContainerGap())
             .addGroup(inputFormPanelLayout.createSequentialGroup()
@@ -299,7 +308,9 @@ public class TambahBarangMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BarangInputFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tambahBarangButton))
+                .addGroup(inputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tambahBarangButton)
+                    .addComponent(jLabel8)))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -347,9 +358,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_noKtpTextFieldActionPerformed
 
     private void tambahBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBarangButtonActionPerformed
-        // TODO add your handling code here:
-        
-        //java.sql.Date selectedDate = (java.sql.Date) datePicker.getModel().getValue();
         
         String namaBarang = namaBarangTextField.getText();
         String jenisBarang = jenisBarangComboBox.getSelectedItem().toString();
@@ -362,6 +370,13 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         String namaPenemu = namaPenemuTextField.getText();
         String noKtp = noKtpTextField.getText();
         String noTelepon = noTeleponTextField.getText();
+        
+        //validate input
+        if(namaBarang.isEmpty()||jenisBarang.isEmpty()||tglDitemukan.isEmpty()||namaPenemu.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Harap isi semua kolom yang wajib diisi!", "Pesan", WARNING_MESSAGE);
+            return;
+        }
+        
         
         boolean success = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
@@ -402,6 +417,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jenisBarangComboBox;
     private javax.swing.JLabel judul;

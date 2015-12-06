@@ -120,6 +120,8 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="tambahBarangButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -140,7 +142,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BarangInputFormPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="tambahBarangButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tambahBarangButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -161,12 +166,10 @@
                           </Group>
                           <EmptySpace pref="68" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="namaBarangTextField" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <Component id="jenisBarangComboBox" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="tglDitemukanTextField" min="-2" max="-2" attributes="0"/>
+                              <Component id="namaBarangTextField" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="jenisBarangComboBox" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="tglDitemukanTextField" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -243,17 +246,17 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nama barang"/>
+                    <Property name="text" type="java.lang.String" value="Nama barang*"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Jenis barang"/>
+                    <Property name="text" type="java.lang.String" value="Jenis barang*"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Tanggal ditemukan"/>
+                    <Property name="text" type="java.lang.String" value="Tanggal ditemukan*"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
@@ -331,7 +334,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nama penemu"/>
+                    <Property name="text" type="java.lang.String" value="Nama penemu*"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
@@ -365,6 +368,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahBarangButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="* kolom harap diisi"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
