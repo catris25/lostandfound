@@ -42,12 +42,32 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
     
-    public void runMethods(){
-        System.out.println("this method is RUNNING...");
-        this.setLocationRelativeTo(null);
+    private void lihatSudahDiambil(){
         bc = new BarangController();
         bc.start();
-        ResultSet dataBarang = bc.lihatBarangHilang();
+        ResultSet dataBarang = bc.lihatBarangSudahDiambil();
+        barangHilangTable.setEnabled(false);
+        
+        barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
+        
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(30);
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Tgl ditemukan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(4).setHeaderValue("Keterangan");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP Penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon Penemu");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Pemilik");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(9).setHeaderValue("No KTP Pemilik");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(10).setHeaderValue("Tgl mengambil");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(11).setHeaderValue("Telepon Pemilik");
+        barangHilangTable.getTableHeader().getColumnModel().getColumn(12).setHeaderValue("Alamat Pemilik");
+    }
+    
+    private void lihatBelumDiambil(){
+        ResultSet dataBarang = bc.lihatBarangBelumDiambil();
         barangHilangTable.setEnabled(false);
         
         barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
@@ -60,7 +80,15 @@ public class MainMenu extends javax.swing.JFrame {
         barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
         barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
-        
+
+    }
+    
+    public void runMethods(){
+        System.out.println("this method is RUNNING...");
+        this.setLocationRelativeTo(null);
+        bc = new BarangController();
+        bc.start();
+        lihatBelumDiambil();        
         //barangHilangTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         TableColumnModel tcm = barangHilangTable.getColumnModel();
         TableColumn tc = tcm.getColumn(1);
@@ -87,11 +115,11 @@ public class MainMenu extends javax.swing.JFrame {
         kategoriBarangBox = new javax.swing.JComboBox();
         cariBarangButton = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
-        lihatSemuaBarangButton = new javax.swing.JButton();
+        lihatBarangButton = new javax.swing.JButton();
         tambahBarangButton = new javax.swing.JButton();
         ambilBarangButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        refreshButton = new javax.swing.JButton();
+        lihatBarangComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lost and Found");
@@ -169,7 +197,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cariBarangButton))
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         cariBarangPanelLayout.setVerticalGroup(
             cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,13 +208,15 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kategoriBarangBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cariBarangButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        lihatSemuaBarangButton.setText("Lihat semua barang");
-        lihatSemuaBarangButton.addActionListener(new java.awt.event.ActionListener() {
+        menuPanel.setPreferredSize(new java.awt.Dimension(550, 55));
+
+        lihatBarangButton.setText("Lihat");
+        lihatBarangButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lihatSemuaBarangButtonActionPerformed(evt);
+                lihatBarangButtonActionPerformed(evt);
             }
         });
 
@@ -206,10 +236,10 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Menu ");
 
-        refreshButton.setText("Refresh");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+        lihatBarangComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang yang belum diambil", "Barang yang sudah diambil" }));
+        lihatBarangComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+                lihatBarangComboBoxActionPerformed(evt);
             }
         });
 
@@ -217,24 +247,19 @@ public class MainMenu extends javax.swing.JFrame {
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(refreshButton))
-                            .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addComponent(lihatSemuaBarangButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                                .addComponent(tambahBarangButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ambilBarangButton)))
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lihatBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lihatBarangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tambahBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ambilBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(22, 22, 22))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,12 +267,13 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lihatSemuaBarangButton)
-                    .addComponent(tambahBarangButton)
-                    .addComponent(ambilBarangButton))
+                    .addComponent(lihatBarangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahBarangButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lihatBarangButton)
+                    .addComponent(ambilBarangButton))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout topMenuPanelLayout = new javax.swing.GroupLayout(topMenuPanel);
@@ -256,13 +282,16 @@ public class MainMenu extends javax.swing.JFrame {
             topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topMenuPanelLayout.createSequentialGroup()
                 .addComponent(cariBarangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(150, 150, 150)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         topMenuPanelLayout.setVerticalGroup(
             topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(topMenuPanelLayout.createSequentialGroup()
+                .addGroup(topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,33 +311,25 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(judulPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lihatSemuaBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatSemuaBarangButtonActionPerformed
-        bc = new BarangController();
-        bc.start();
-        ResultSet dataBarang = bc.lihatSemuaBarang();
-        barangHilangTable.setEnabled(false);
+    private void lihatBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatBarangButtonActionPerformed
+        int lihatMenu = lihatBarangComboBox.getSelectedIndex();
+        if(lihatMenu==0){
+            lihatBelumDiambil();
+        }else if(lihatMenu==1){
+            lihatSudahDiambil();
+        }
         
-        barangHilangTable.setModel(DbUtils.resultSetToTableModel(dataBarang));
         
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("ID");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nama Barang");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Jenis Barang");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Tgl ditemukan");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(4).setHeaderValue("Keterangan");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(5).setHeaderValue("Nama penemu");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(6).setHeaderValue("No KTP");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(7).setHeaderValue("Telepon");
-        barangHilangTable.getTableHeader().getColumnModel().getColumn(8).setHeaderValue("Status barang");
-    }//GEN-LAST:event_lihatSemuaBarangButtonActionPerformed
+    }//GEN-LAST:event_lihatBarangButtonActionPerformed
 
     private void cariBarangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangButtonActionPerformed
         String keyword = keywordBarangText.getText();
@@ -349,9 +370,9 @@ public class MainMenu extends javax.swing.JFrame {
         cari.setVisible(true);
     }//GEN-LAST:event_ambilBarangButtonActionPerformed
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        runMethods();
-    }//GEN-LAST:event_refreshButtonActionPerformed
+    private void lihatBarangComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatBarangComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lihatBarangComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,9 +422,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel judulPanel;
     private javax.swing.JComboBox kategoriBarangBox;
     private javax.swing.JTextField keywordBarangText;
-    private javax.swing.JButton lihatSemuaBarangButton;
+    private javax.swing.JButton lihatBarangButton;
+    private javax.swing.JComboBox lihatBarangComboBox;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JButton refreshButton;
     private javax.swing.JButton tambahBarangButton;
     private javax.swing.JPanel topMenuPanel;
     // End of variables declaration//GEN-END:variables

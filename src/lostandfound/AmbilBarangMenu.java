@@ -2,10 +2,13 @@ package lostandfound;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -255,6 +258,27 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
             return;
         }
 
+        //validate if date is BEFORE the item is found
+//        Calendar cal= Calendar.getInstance();
+//        int today = cal.get(Calendar.DAY_OF_MONTH);
+//        int thisMonth = cal.get(Calendar.MONTH)+1;
+//        int thisYear = cal.get(Calendar.YEAR);
+//        
+//        String hariIni = ""+thisYear+"-"+thisMonth+"-"+today+"";
+//        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+//        try {
+//            java.util.Date found = format.parse(tglMengambil);
+//            java.util.Date date = format.parse(hariIni);
+//            int val = found.compareTo(date);
+//            System.out.println("found "+found);
+//            System.out.println("date "+date);
+//            if(val>0){
+//                JOptionPane.showMessageDialog(null, "Barang tidak bisa diambil SEBELUM barang ditemukan", "Pesan", WARNING_MESSAGE);
+//                return;
+//            }        
+//        } catch (ParseException ex) {
+//            Logger.getLogger(TambahBarangMenu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         BarangController bc = new BarangController();
         boolean success = bc.ambilBarang(nama, noKtp, tglMengambil, noTelepon, alamat, idBarang);

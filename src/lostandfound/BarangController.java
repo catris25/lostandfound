@@ -74,22 +74,7 @@ public class BarangController {
         connect.disconnect();
         message = "Data berhasil diinput!";
         return success;
-    }
-    
-    public ResultSet lihatBarangHilang(){
-        
-        try {
-            sqlQuery = connect.getConnection().createStatement();
-            String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
-                    + "from barang where status_pengambilan=0";
-            sqlResult = sqlQuery.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-     
-        return sqlResult;
-    }
+    }    
     
     public ResultSet cariBarangHilang(String keyword, String kategori){
         try{
@@ -123,7 +108,7 @@ public class BarangController {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
             );
-            String query = "select * from barang where id_barang="+id;
+            String query = "select * from barang where id_barang="+id+" and status_pengambilan='0'";
             sqlResult = sqlQuery.executeQuery(query);
             sqlResult.last();
             int row = sqlResult.getRow();
@@ -139,10 +124,31 @@ public class BarangController {
         return found;
     }
     
-    public ResultSet lihatSemuaBarang(){
+    
+    public ResultSet lihatBarangBelumDiambil(){
+        
         try {
             sqlQuery = connect.getConnection().createStatement();
-            String query = "select * from barang";
+            String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
+                    + "from barang where status_pengambilan=0";
+            sqlResult = sqlQuery.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+     
+        return sqlResult;
+    }
+    
+    
+    public ResultSet lihatBarangSudahDiambil(){
+        try {
+            sqlQuery = connect.getConnection().createStatement();
+//            String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
+//                    + "from barang where status_pengambilan=1";
+            String query = "select b.id_barang, b.nama_barang, b.jenis_barang, b.tgl_ditemukan, b.keterangan, b.nama_penemu, b.no_ktp, b.no_telepon, p.nama_pemilik, p.no_ktp, p.tgl_mengambil, p.no_telepon, p.alamat" +
+                            " from barang b, pemilik p " +
+                            "where b.status_pengambilan = '1' ";
             sqlResult = sqlQuery.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);

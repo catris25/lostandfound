@@ -110,7 +110,7 @@ public class CariBarangByIDMenu extends javax.swing.JFrame {
             ambil.setVisible(true);
             this.setVisible(false);
         }else{
-            JOptionPane.showMessageDialog(null, "Maaf, barang dengan id yang Anda cari tidak ditemukan!", "Alert", WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Maaf, barang dengan id yang Anda cari tidak ditemukan atau barang sudah diambil!", "Alert", WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_cariBarangByIDButtonActionPerformed

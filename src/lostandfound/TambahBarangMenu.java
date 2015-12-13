@@ -378,6 +378,28 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         }
         
         
+        //validate date
+        Calendar cal= Calendar.getInstance();
+        int today = cal.get(Calendar.DAY_OF_MONTH);
+        int thisMonth = cal.get(Calendar.MONTH)+1;
+        int thisYear = cal.get(Calendar.YEAR);
+        
+        String hariIni = ""+thisYear+"-"+thisMonth+"-"+today+"";
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        try {
+            java.util.Date found = format.parse(tglDitemukan);
+            java.util.Date date = format.parse(hariIni);
+            int val = found.compareTo(date);
+            System.out.println("found "+found);
+            System.out.println("date "+date);
+            if(val>0){
+                JOptionPane.showMessageDialog(null, "Tanggal tidak bisa setelah hari ini!", "Pesan", WARNING_MESSAGE);
+                return;
+            }        
+        } catch (ParseException ex) {
+            Logger.getLogger(TambahBarangMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         boolean success = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
         if(success){
