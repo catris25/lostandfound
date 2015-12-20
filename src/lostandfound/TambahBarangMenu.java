@@ -45,7 +45,7 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         this.setResizable(false);
         this.setTitle("Tambah Barang");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        MainMenu mm = new MainMenu();
+        MainMenu mm = new MainMenu(true);
         mm.setAlwaysOnTop(true);
         
         UtilDateModel model = new UtilDateModel();
