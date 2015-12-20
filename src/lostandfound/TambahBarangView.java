@@ -47,7 +47,7 @@ public class TambahBarangView extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         MainView mm = new MainView(true);
         mm.setAlwaysOnTop(true);
-        
+        keteranganTextArea.setLineWrap(true);
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         

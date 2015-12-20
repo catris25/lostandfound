@@ -135,10 +135,10 @@ public class BarangController {
             String query;
             if(keyword.isEmpty()){
                 query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
-                        + "from barang where jenis_barang='"+kategori+"'";
+                        + "from barang where jenis_barang='"+kategori+"' order by id_barang";
             }else{
                 query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
-                        + "from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"'";
+                        + "from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"' order by id_barang";
             }
             sqlResult = sqlQuery.executeQuery(query);
             
@@ -179,7 +179,7 @@ public class BarangController {
         try {
             sqlQuery = connect.getConnection().createStatement();
             String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
-                    + "from barang where status_pengambilan=0";
+                    + "from barang where status_pengambilan=0 order by id_barang";
             sqlResult = sqlQuery.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +197,7 @@ public class BarangController {
                             + "b.keterangan, b.nama_penemu, b.no_ktp, b.no_telepon, "
                             + "p.nama_pemilik, p.no_ktp, p.tgl_mengambil, p.no_telepon, p.alamat"
                             + " from barang b, pemilik p " +
-                            "where b.id_barang = p.id_barang and b.status_pengambilan = '1' ";
+                            "where b.id_barang = p.id_barang and b.status_pengambilan = '1' order by id_barang";
             sqlResult = sqlQuery.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
