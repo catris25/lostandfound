@@ -19,11 +19,11 @@ public class MainView extends javax.swing.JFrame {
     public MainView(boolean isAdmin) {
         initComponents();
         if(!isAdmin){
-            menuPanel.setVisible(false);
+            adminMenuPanel.setVisible(false);
         }else{
             UserController user = new UserController();
             String username = user.user;
-            menuPanel.setVisible(true);
+            adminMenuPanel.setVisible(true);
             welcomeText.setText("Selamat datang, admin "+username+"!");
         }
         runMethods();
@@ -113,14 +113,14 @@ public class MainView extends javax.swing.JFrame {
         topMenuPanel = new javax.swing.JPanel();
         cariBarangPanel = new javax.swing.JPanel();
         keywordBarangText = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        cariBarangLabel = new javax.swing.JLabel();
         kategoriBarangBox = new javax.swing.JComboBox();
         cariBarangButton = new javax.swing.JButton();
-        menuPanel = new javax.swing.JPanel();
+        adminMenuPanel = new javax.swing.JPanel();
         lihatBarangButton = new javax.swing.JButton();
         tambahBarangButton = new javax.swing.JButton();
         ambilBarangButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        judulMenuPanelLabel = new javax.swing.JLabel();
         lihatBarangComboBox = new javax.swing.JComboBox();
         welcomeText = new javax.swing.JLabel();
 
@@ -171,7 +171,7 @@ public class MainView extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(barangHilangTable);
 
-        jLabel1.setText("Cari Barang");
+        cariBarangLabel.setText("Cari Barang");
 
         kategoriBarangBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang elektronik", "Makanan/minuman", "Perhiasan/aksesoris", "Buku/ATK", "Pakaian/garmen", "Tas/dompet", "Dokumen", "Kunci", "Lainnya" }));
         kategoriBarangBox.addActionListener(new java.awt.event.ActionListener() {
@@ -199,13 +199,13 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(kategoriBarangBox, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cariBarangButton))
-                    .addComponent(jLabel1))
+                    .addComponent(cariBarangLabel))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         cariBarangPanelLayout.setVerticalGroup(
             cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cariBarangPanelLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(cariBarangLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cariBarangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(keywordBarangText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +214,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        menuPanel.setPreferredSize(new java.awt.Dimension(550, 55));
+        adminMenuPanel.setPreferredSize(new java.awt.Dimension(550, 55));
 
         lihatBarangButton.setText("Lihat");
         lihatBarangButton.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +237,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Menu ");
+        judulMenuPanelLabel.setText("Admin Menu ");
 
         lihatBarangComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Barang yang belum diambil", "Barang yang sudah diambil" }));
         lihatBarangComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -246,46 +246,48 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        welcomeText.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        welcomeText.setForeground(new java.awt.Color(0, 51, 255));
+        welcomeText.setBackground(new java.awt.Color(255, 255, 255));
+        welcomeText.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        welcomeText.setForeground(new java.awt.Color(255, 51, 51));
+        welcomeText.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         welcomeText.setText("welcome");
 
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout adminMenuPanelLayout = new javax.swing.GroupLayout(adminMenuPanel);
+        adminMenuPanel.setLayout(adminMenuPanelLayout);
+        adminMenuPanelLayout.setHorizontalGroup(
+            adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminMenuPanelLayout.createSequentialGroup()
+                        .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lihatBarangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lihatBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tambahBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ambilBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(117, 117, 117)
-                        .addComponent(welcomeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ambilBarangButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tambahBarangButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(adminMenuPanelLayout.createSequentialGroup()
+                        .addComponent(judulMenuPanelLabel)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(welcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+        adminMenuPanelLayout.setVerticalGroup(
+            adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminMenuPanelLayout.createSequentialGroup()
+                .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(judulMenuPanelLabel)
                     .addComponent(welcomeText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lihatBarangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tambahBarangButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(adminMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lihatBarangButton)
                     .addComponent(ambilBarangButton))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout topMenuPanelLayout = new javax.swing.GroupLayout(topMenuPanel);
@@ -295,15 +297,14 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topMenuPanelLayout.createSequentialGroup()
                 .addComponent(cariBarangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(97, 97, 97)
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(adminMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         topMenuPanelLayout.setVerticalGroup(
             topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topMenuPanelLayout.createSequentialGroup()
-                .addGroup(topMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cariBarangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(adminMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,8 +324,8 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(judulPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(topMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -392,20 +393,20 @@ public class MainView extends javax.swing.JFrame {
  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminMenuPanel;
     private javax.swing.JButton ambilBarangButton;
     private javax.swing.JTable barangHilangTable;
     private javax.swing.JButton cariBarangButton;
+    private javax.swing.JLabel cariBarangLabel;
     private javax.swing.JPanel cariBarangPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel judulLabel;
+    private javax.swing.JLabel judulMenuPanelLabel;
     private javax.swing.JPanel judulPanel;
     private javax.swing.JComboBox kategoriBarangBox;
     private javax.swing.JTextField keywordBarangText;
     private javax.swing.JButton lihatBarangButton;
     private javax.swing.JComboBox lihatBarangComboBox;
-    private javax.swing.JPanel menuPanel;
     private javax.swing.JButton tambahBarangButton;
     private javax.swing.JPanel topMenuPanel;
     private javax.swing.JLabel welcomeText;

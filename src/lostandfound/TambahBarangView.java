@@ -93,7 +93,7 @@ public class TambahBarangView extends javax.swing.JFrame {
     private void initComponents() {
 
         judulPanel = new javax.swing.JPanel();
-        judul = new javax.swing.JLabel();
+        judulLabel = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
         inputFormPanel = new javax.swing.JPanel();
         InputFormFieldPanel = new javax.swing.JPanel();
@@ -101,28 +101,28 @@ public class TambahBarangView extends javax.swing.JFrame {
         jenisBarangComboBox = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         keteranganTextArea = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        namaBarangLabel = new javax.swing.JLabel();
+        jenisBarangLabel = new javax.swing.JLabel();
+        tglDitemukanLabel = new javax.swing.JLabel();
+        keteranganLabel = new javax.swing.JLabel();
         tglDitemukanTextField = new javax.swing.JButton();
-        BarangInputFormPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        barangInputFormPanel = new javax.swing.JPanel();
+        namaPenemuLabel = new javax.swing.JLabel();
+        noKtpLabel = new javax.swing.JLabel();
+        teleponLabel = new javax.swing.JLabel();
         namaPenemuTextField = new javax.swing.JTextField();
         noKtpTextField = new javax.swing.JTextField();
         noTeleponTextField = new javax.swing.JTextField();
         tambahBarangButton = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        infoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Tambah Barang Hilang");
 
-        judul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        judul.setForeground(new java.awt.Color(255, 0, 51));
-        judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        judul.setText("Form Penambahan Barang Hilang");
+        judulLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        judulLabel.setForeground(new java.awt.Color(255, 0, 51));
+        judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        judulLabel.setText("Form Penambahan Barang Hilang");
 
         javax.swing.GroupLayout judulPanelLayout = new javax.swing.GroupLayout(judulPanel);
         judulPanel.setLayout(judulPanelLayout);
@@ -130,14 +130,14 @@ public class TambahBarangView extends javax.swing.JFrame {
             judulPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(judulPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(judul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(judulLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         judulPanelLayout.setVerticalGroup(
             judulPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(judulPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(judul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(judulLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -162,13 +162,13 @@ public class TambahBarangView extends javax.swing.JFrame {
         keteranganTextArea.setRows(5);
         jScrollPane1.setViewportView(keteranganTextArea);
 
-        jLabel1.setText("Nama barang*");
+        namaBarangLabel.setText("Nama barang*");
 
-        jLabel2.setText("Jenis barang*");
+        jenisBarangLabel.setText("Jenis barang*");
 
-        jLabel3.setText("Tanggal ditemukan*");
+        tglDitemukanLabel.setText("Tanggal ditemukan*");
 
-        jLabel4.setText("Keterangan");
+        keteranganLabel.setText("Keterangan");
 
         tglDitemukanTextField.setText("date");
         tglDitemukanTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -184,10 +184,10 @@ public class TambahBarangView extends javax.swing.JFrame {
             .addGroup(InputFormFieldPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(namaBarangLabel)
+                    .addComponent(jenisBarangLabel)
+                    .addComponent(tglDitemukanLabel)
+                    .addComponent(keteranganLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(namaBarangTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,29 +202,29 @@ public class TambahBarangView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(namaBarangLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(jenisBarangLabel)
                     .addComponent(jenisBarangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(tglDitemukanLabel)
                     .addComponent(tglDitemukanTextField))
                 .addGap(14, 14, 14)
                 .addGroup(InputFormFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(keteranganLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        BarangInputFormPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Penemu"));
+        barangInputFormPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Penemu"));
 
-        jLabel5.setText("Nama penemu*");
+        namaPenemuLabel.setText("Nama penemu*");
 
-        jLabel6.setText("No KTP");
+        noKtpLabel.setText("No KTP");
 
-        jLabel7.setText("No telepon");
+        teleponLabel.setText("No telepon");
 
         namaPenemuTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,40 +238,40 @@ public class TambahBarangView extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout BarangInputFormPanelLayout = new javax.swing.GroupLayout(BarangInputFormPanel);
-        BarangInputFormPanel.setLayout(BarangInputFormPanelLayout);
-        BarangInputFormPanelLayout.setHorizontalGroup(
-            BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarangInputFormPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout barangInputFormPanelLayout = new javax.swing.GroupLayout(barangInputFormPanel);
+        barangInputFormPanel.setLayout(barangInputFormPanelLayout);
+        barangInputFormPanelLayout.setHorizontalGroup(
+            barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barangInputFormPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BarangInputFormPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                .addGroup(barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(barangInputFormPanelLayout.createSequentialGroup()
+                        .addComponent(teleponLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(noTeleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarangInputFormPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barangInputFormPanelLayout.createSequentialGroup()
+                        .addComponent(noKtpLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(noKtpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarangInputFormPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barangInputFormPanelLayout.createSequentialGroup()
+                        .addComponent(namaPenemuLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(namaPenemuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
-        BarangInputFormPanelLayout.setVerticalGroup(
-            BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BarangInputFormPanelLayout.createSequentialGroup()
+        barangInputFormPanelLayout.setVerticalGroup(
+            barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barangInputFormPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(namaPenemuLabel)
                     .addComponent(namaPenemuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                .addGroup(barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(noKtpLabel)
                     .addComponent(noKtpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(BarangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                .addGroup(barangInputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teleponLabel)
                     .addComponent(noTeleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -283,7 +283,7 @@ public class TambahBarangView extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("* kolom harap diisi");
+        infoLabel.setText("* kolom harap diisi");
 
         javax.swing.GroupLayout inputFormPanelLayout = new javax.swing.GroupLayout(inputFormPanel);
         inputFormPanel.setLayout(inputFormPanelLayout);
@@ -291,13 +291,13 @@ public class TambahBarangView extends javax.swing.JFrame {
             inputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputFormPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addComponent(infoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tambahBarangButton)
                 .addContainerGap())
             .addGroup(inputFormPanelLayout.createSequentialGroup()
                 .addGroup(inputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(BarangInputFormPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barangInputFormPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(InputFormFieldPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -306,11 +306,11 @@ public class TambahBarangView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputFormPanelLayout.createSequentialGroup()
                 .addComponent(InputFormFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BarangInputFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barangInputFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(inputFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahBarangButton)
-                    .addComponent(jLabel8)))
+                    .addComponent(infoLabel)))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -376,6 +376,20 @@ public class TambahBarangView extends javax.swing.JFrame {
             return;
         }
         
+        if(!noKtp.equals("")){
+            if(!noKtp.matches(".*\\d.*") || noKtp.length()!=16){
+            JOptionPane.showMessageDialog(null, "Harap cek input no KTP Anda!", "Pesan", WARNING_MESSAGE);
+            return;
+            }
+        }
+        
+        if(!noTelepon.equals("")){
+            if(!noTelepon.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Harap cek input no telepon Anda!", "Pesan", WARNING_MESSAGE);
+            return;
+            }
+        }
+        
         boolean success = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
         if(success){
@@ -404,28 +418,28 @@ public class TambahBarangView extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BarangInputFormPanel;
     private javax.swing.JPanel InputFormFieldPanel;
+    private javax.swing.JPanel barangInputFormPanel;
     private javax.swing.JPanel bodyPanel;
+    private javax.swing.JLabel infoLabel;
     private javax.swing.JPanel inputFormPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jenisBarangComboBox;
-    private javax.swing.JLabel judul;
+    private javax.swing.JLabel jenisBarangLabel;
+    private javax.swing.JLabel judulLabel;
     private javax.swing.JPanel judulPanel;
+    private javax.swing.JLabel keteranganLabel;
     private javax.swing.JTextArea keteranganTextArea;
+    private javax.swing.JLabel namaBarangLabel;
     private javax.swing.JTextField namaBarangTextField;
+    private javax.swing.JLabel namaPenemuLabel;
     private javax.swing.JTextField namaPenemuTextField;
+    private javax.swing.JLabel noKtpLabel;
     private javax.swing.JTextField noKtpTextField;
     private javax.swing.JTextField noTeleponTextField;
     private javax.swing.JButton tambahBarangButton;
+    private javax.swing.JLabel teleponLabel;
+    private javax.swing.JLabel tglDitemukanLabel;
     private javax.swing.JButton tglDitemukanTextField;
     // End of variables declaration//GEN-END:variables
 }

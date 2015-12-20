@@ -87,11 +87,11 @@ public class AmbilBarangView extends javax.swing.JFrame {
         judulLabel = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
         IDBarangLabel = new javax.swing.JLabel();
-        NamaLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        namaLabel = new javax.swing.JLabel();
+        noKtpLabel = new javax.swing.JLabel();
+        tglPengambilanLabel = new javax.swing.JLabel();
+        alamatLabel = new javax.swing.JLabel();
+        teleponLabel = new javax.swing.JLabel();
         IDBarangTextField = new javax.swing.JTextField();
         namaTextField = new javax.swing.JTextField();
         noKtpTextField = new javax.swing.JTextField();
@@ -99,11 +99,12 @@ public class AmbilBarangView extends javax.swing.JFrame {
         noTeleponTextField = new javax.swing.JTextField();
         tglMengambilTextField = new javax.swing.JButton();
         ambilBarangButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        infoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         judulLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        judulLabel.setForeground(new java.awt.Color(51, 153, 255));
         judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         judulLabel.setText("Form Pengambilan Barang");
 
@@ -111,15 +112,15 @@ public class AmbilBarangView extends javax.swing.JFrame {
 
         IDBarangLabel.setText("ID Barang*");
 
-        NamaLabel.setText("Nama pemilik*");
+        namaLabel.setText("Nama pemilik*");
 
-        jLabel3.setText("No KTP*");
+        noKtpLabel.setText("No KTP*");
 
-        jLabel4.setText("Tanggal pengambilan*");
+        tglPengambilanLabel.setText("Tanggal pengambilan*");
 
-        jLabel5.setText("Alamat");
+        alamatLabel.setText("Alamat");
 
-        jLabel6.setText("No telepon");
+        teleponLabel.setText("No telepon");
 
         tglMengambilTextField.setText("date");
 
@@ -132,8 +133,8 @@ public class AmbilBarangView extends javax.swing.JFrame {
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(bodyPanelLayout.createSequentialGroup()
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(NamaLabel)
+                            .addComponent(noKtpLabel)
+                            .addComponent(namaLabel)
                             .addComponent(IDBarangLabel))
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bodyPanelLayout.createSequentialGroup()
@@ -148,9 +149,9 @@ public class AmbilBarangView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(bodyPanelLayout.createSequentialGroup()
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(tglPengambilanLabel)
+                            .addComponent(alamatLabel)
+                            .addComponent(teleponLabel))
                         .addGap(95, 95, 95)
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(alamatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,23 +168,23 @@ public class AmbilBarangView extends javax.swing.JFrame {
                     .addComponent(IDBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NamaLabel)
+                    .addComponent(namaLabel)
                     .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(noKtpLabel)
                     .addComponent(noKtpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tglMengambilTextField)
-                    .addComponent(jLabel4))
+                    .addComponent(tglPengambilanLabel))
                 .addGap(17, 17, 17)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(alamatLabel)
                     .addComponent(alamatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(teleponLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(noTeleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
@@ -195,7 +196,7 @@ public class AmbilBarangView extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("* kolom harap diisi");
+        infoLabel.setText("* kolom harap diisi");
 
         javax.swing.GroupLayout judulPanelLayout = new javax.swing.GroupLayout(judulPanel);
         judulPanel.setLayout(judulPanelLayout);
@@ -204,7 +205,7 @@ public class AmbilBarangView extends javax.swing.JFrame {
             .addComponent(judulLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, judulPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addComponent(infoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ambilBarangButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
@@ -222,7 +223,7 @@ public class AmbilBarangView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(judulPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ambilBarangButton)
-                    .addComponent(jLabel1))
+                    .addComponent(infoLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -256,6 +257,20 @@ public class AmbilBarangView extends javax.swing.JFrame {
         if(idBarang.isEmpty()||nama.isEmpty()||tglMengambil.isEmpty()||noKtp.isEmpty()){
             JOptionPane.showMessageDialog(null, "Harap isi semua kolom yang wajib diisi!", "Pesan", WARNING_MESSAGE);
             return;
+        }
+        
+        if(!noKtp.equals("")){
+            if(!noKtp.matches(".*\\d.*") || noKtp.length()!=16){
+            JOptionPane.showMessageDialog(null, "Harap cek input no KTP Anda!", "Pesan", WARNING_MESSAGE);
+            return;
+            }
+        }
+        
+        if(!noTelepon.equals("")){
+            if(!noTelepon.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Harap cek input no telepon Anda!", "Pesan", WARNING_MESSAGE);
+            return;
+            }
         }
 
         BarangController bc = new BarangController();
@@ -308,20 +323,20 @@ public class AmbilBarangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IDBarangLabel;
     private javax.swing.JTextField IDBarangTextField;
-    private javax.swing.JLabel NamaLabel;
+    private javax.swing.JLabel alamatLabel;
     private javax.swing.JTextField alamatTextField;
     private javax.swing.JButton ambilBarangButton;
     private javax.swing.JPanel bodyPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel judulLabel;
     private javax.swing.JPanel judulPanel;
+    private javax.swing.JLabel namaLabel;
     private javax.swing.JTextField namaTextField;
+    private javax.swing.JLabel noKtpLabel;
     private javax.swing.JTextField noKtpTextField;
     private javax.swing.JTextField noTeleponTextField;
+    private javax.swing.JLabel teleponLabel;
     private javax.swing.JButton tglMengambilTextField;
+    private javax.swing.JLabel tglPengambilanLabel;
     // End of variables declaration//GEN-END:variables
 }
