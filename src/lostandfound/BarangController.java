@@ -1,11 +1,18 @@
 package lostandfound;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
 /**
  *
@@ -25,8 +32,30 @@ public class BarangController {
     }
     
     
-    public boolean tambahBarang(String namaBarang, String jenisBarang, String tglDitemukan, String ket, String namaPenemu, String noKtp, String noTelepon){
-        String message;
+    public boolean tambahBarang(String namaBarang, String jenisBarang, String tglDitemukan, 
+            String ket, String namaPenemu, String noKtp, String noTelepon){
+
+        //validate date
+        Calendar cal= Calendar.getInstance();
+        int today = cal.get(Calendar.DAY_OF_MONTH);
+        int thisMonth = cal.get(Calendar.MONTH)+1;
+        int thisYear = cal.get(Calendar.YEAR);
+        
+        String hariIni = ""+thisYear+"-"+thisMonth+"-"+today+"";
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        try {
+            java.util.Date found = format.parse(tglDitemukan);
+            java.util.Date date = format.parse(hariIni);
+            int val = found.compareTo(date);
+            
+            if(val>0){
+                JOptionPane.showMessageDialog(null, "Tanggal tidak bisa setelah hari ini!", "Pesan", WARNING_MESSAGE);
+                return false;
+            }        
+        } catch (ParseException ex) {
+            Logger.getLogger(TambahBarangView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         boolean success;
         try{
             start();
@@ -34,45 +63,68 @@ public class BarangController {
             String query = "insert into barang values (seq_barang.nextval, '"+ namaBarang+"', '"+jenisBarang+
                     "' , to_date('" +tglDitemukan +"', 'yyyy-MM-dd') , '"+ 
                     ket+"' , '"+ namaPenemu+"' , '"+ noKtp +"' , '"+ noTelepon+"',"+0+")";
-            System.out.println("query input "+query);
+            
             sqlQuery.executeQuery(query);
         }catch(SQLException ex){
-            message = "Maaf data gagal diinput! "+ex.toString();
             success= false;
-            System.out.println("message : "+message);
+            
             return success;
         }
-        
-        connect.disconnect();
-        message = "Data berhasil diinput!";
+        connect.disconnect();       
         success = true;
         return success;
         
     }
     
     public boolean ambilBarang(String nama, String noKtp, String tglMengambil, String noTelepon, String alamat, String idBarang){
-        String message;
         boolean success;
+        start();
+        
+        //validate if date is BEFORE the item is found
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        try {
+            sqlQuery = connect.getConnection().createStatement();
+            String query = "select tgl_ditemukan from barang where id_barang = '"+idBarang+"'";
+            sqlResult = sqlQuery.executeQuery(query);
+            while(sqlResult.next()){
+                String foundDate = sqlResult.getDate("TGL_DITEMUKAN").toString();
+                java.util.Date found = format.parse(foundDate);
+                java.util.Date take = format.parse(tglMengambil);
+             
+                if(take.before(found)){
+                JOptionPane.showMessageDialog(null, "Barang tidak bisa diambil SEBELUM ditemukan! Cek kambali input tanggal Anda!",
+                        "Pesan", WARNING_MESSAGE);
+                return false;
+                }else{
+                    break;
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        String message;
+        
         try{
             start();
             sqlQuery = connect.getConnection().createStatement();
-            String query = "insert into pemilik values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'yyyy-MM-dd'),'"
+            String query1 = "insert into pemilik values(seq_pemilik.nextval, '"+nama+"', '"+noKtp+"', to_date('"+tglMengambil+"', 'yyyy-MM-dd'),'"
                     +noTelepon+"','"+alamat+"',"+idBarang+")";
-            System.out.println("query 1 : "+query);
-            sqlQuery.executeQuery(query);
-            query = "update Barang set status_pengambilan="+1+" where id_barang="+idBarang;
-            System.out.println("query 2 : "+query);
-            sqlQuery.executeQuery(query);
+            sqlQuery.executeQuery(query1);
+            String query2 = "update Barang set status_pengambilan="+1+" where id_barang="+idBarang;
+            
+            sqlQuery.executeQuery(query2);
             success=true;
         }catch(SQLException e){
             message = "Maaf data gagal diinput!";
-            System.out.println("message : "+message);
             success =false;
             return false;
         }
-        
         connect.disconnect();
-        message = "Data berhasil diinput!";
         return success;
     }    
     
@@ -88,7 +140,6 @@ public class BarangController {
                 query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
                         + "from barang where nama_barang='"+keyword+"' and jenis_barang='"+kategori+"'";
             }
-            System.out.println("query = "+query);
             sqlResult = sqlQuery.executeQuery(query);
             
         }catch(SQLException ex){
@@ -99,7 +150,7 @@ public class BarangController {
         return sqlResult;
     }
     
-    public boolean cariBarangByID(String id){
+    public boolean cariBarangByID(String id) throws ParseException{
         boolean found=false;
         try{
             start();
@@ -113,12 +164,10 @@ public class BarangController {
             sqlResult.last();
             int row = sqlResult.getRow();
             sqlResult.beforeFirst();
-            System.out.println("number of rows = "+row);
             if(row==1){
                 found=true;
             }
         }catch(SQLException e){
-            System.out.println("cari barang failed, error message "+e.toString());
             found = false;
         }
         return found;
@@ -144,11 +193,11 @@ public class BarangController {
     public ResultSet lihatBarangSudahDiambil(){
         try {
             sqlQuery = connect.getConnection().createStatement();
-//            String query = "select id_barang, nama_barang, jenis_barang, tgl_ditemukan, keterangan, nama_penemu, no_ktp, no_telepon "
-//                    + "from barang where status_pengambilan=1";
-            String query = "select b.id_barang, b.nama_barang, b.jenis_barang, b.tgl_ditemukan, b.keterangan, b.nama_penemu, b.no_ktp, b.no_telepon, p.nama_pemilik, p.no_ktp, p.tgl_mengambil, p.no_telepon, p.alamat" +
-                            " from barang b, pemilik p " +
-                            "where b.status_pengambilan = '1' ";
+            String query = "select b.id_barang, b.nama_barang, b.jenis_barang, b.tgl_ditemukan, "
+                            + "b.keterangan, b.nama_penemu, b.no_ktp, b.no_telepon, "
+                            + "p.nama_pemilik, p.no_ktp, p.tgl_mengambil, p.no_telepon, p.alamat"
+                            + " from barang b, pemilik p " +
+                            "where b.id_barang = p.id_barang and b.status_pengambilan = '1' ";
             sqlResult = sqlQuery.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(BarangController.class.getName()).log(Level.SEVERE, null, ex);

@@ -35,17 +35,17 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author LIA
  */
 
-public class TambahBarangMenu extends javax.swing.JFrame {
+public class TambahBarangView extends javax.swing.JFrame {
     JDatePickerImpl datePicker; 
     BarangController barang = new BarangController();
     
-    public TambahBarangMenu() {
+    public TambahBarangView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Tambah Barang");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        MainMenu mm = new MainMenu(true);
+        MainView mm = new MainView(true);
         mm.setAlwaysOnTop(true);
         
         UtilDateModel model = new UtilDateModel();
@@ -365,7 +365,6 @@ public class TambahBarangMenu extends javax.swing.JFrame {
         int bln = datePicker.getModel().getMonth()+1;
         int thn = datePicker.getModel().getYear();
         String tglDitemukan=""+thn+"-"+bln+"-"+tgl;
-        System.out.println("tgl ditemukan "+tglDitemukan);
         String ket = keteranganTextArea.getText();
         String namaPenemu = namaPenemuTextField.getText();
         String noKtp = noKtpTextField.getText();
@@ -377,36 +376,13 @@ public class TambahBarangMenu extends javax.swing.JFrame {
             return;
         }
         
-        
-        //validate date
-        Calendar cal= Calendar.getInstance();
-        int today = cal.get(Calendar.DAY_OF_MONTH);
-        int thisMonth = cal.get(Calendar.MONTH)+1;
-        int thisYear = cal.get(Calendar.YEAR);
-        
-        String hariIni = ""+thisYear+"-"+thisMonth+"-"+today+"";
-        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-        try {
-            java.util.Date found = format.parse(tglDitemukan);
-            java.util.Date date = format.parse(hariIni);
-            int val = found.compareTo(date);
-            System.out.println("found "+found);
-            System.out.println("date "+date);
-            if(val>0){
-                JOptionPane.showMessageDialog(null, "Tanggal tidak bisa setelah hari ini!", "Pesan", WARNING_MESSAGE);
-                return;
-            }        
-        } catch (ParseException ex) {
-            Logger.getLogger(TambahBarangMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         boolean success = barang.tambahBarang(namaBarang, jenisBarang, tglDitemukan, ket, namaPenemu, noKtp, noTelepon);
         
         if(success){
             JOptionPane.showMessageDialog(null, "Data berhasil diinput!", "Pesan", INFORMATION_MESSAGE);
             this.setVisible(false);
         }else{
-            JOptionPane.showMessageDialog(null, "Maaf, data gagal diinput!", "Pesan", WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Maaf, data gagal diinput! Cek kembali input Anda!", "Pesan", WARNING_MESSAGE);
         }
         
         

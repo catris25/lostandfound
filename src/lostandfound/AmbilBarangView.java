@@ -25,13 +25,13 @@ import org.jdatepicker.impl.UtilDateModel;
  */
 
 
-public class AmbilBarangMenu extends javax.swing.JFrame {
+public class AmbilBarangView extends javax.swing.JFrame {
     private final String id;
     JDatePickerImpl datePicker; 
     /**
      * Creates new form AmbilBarangMenu
      */
-    public AmbilBarangMenu(String id) {
+    public AmbilBarangView(String id) {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -258,28 +258,6 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
             return;
         }
 
-        //validate if date is BEFORE the item is found
-//        Calendar cal= Calendar.getInstance();
-//        int today = cal.get(Calendar.DAY_OF_MONTH);
-//        int thisMonth = cal.get(Calendar.MONTH)+1;
-//        int thisYear = cal.get(Calendar.YEAR);
-//        
-//        String hariIni = ""+thisYear+"-"+thisMonth+"-"+today+"";
-//        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-//        try {
-//            java.util.Date found = format.parse(tglMengambil);
-//            java.util.Date date = format.parse(hariIni);
-//            int val = found.compareTo(date);
-//            System.out.println("found "+found);
-//            System.out.println("date "+date);
-//            if(val>0){
-//                JOptionPane.showMessageDialog(null, "Barang tidak bisa diambil SEBELUM barang ditemukan", "Pesan", WARNING_MESSAGE);
-//                return;
-//            }        
-//        } catch (ParseException ex) {
-//            Logger.getLogger(TambahBarangMenu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
         BarangController bc = new BarangController();
         boolean success = bc.ambilBarang(nama, noKtp, tglMengambil, noTelepon, alamat, idBarang);
         
@@ -309,20 +287,20 @@ public class AmbilBarangMenu extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(AmbilBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AmbilBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(AmbilBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AmbilBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(AmbilBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AmbilBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(AmbilBarangMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(AmbilBarangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new AmbilBarangMenu(id).setVisible(true);
+//                new AmbilBarangView(id).setVisible(true);
 //            }
 //        });
 //    }

@@ -1,5 +1,8 @@
 package lostandfound;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -9,12 +12,12 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 
 
-public class CariBarangByIDMenu extends javax.swing.JFrame {
+public class CariBarangByIDView extends javax.swing.JFrame {
 
     /**
      * Creates new form cariBarangByIDMenu
      */
-    public CariBarangByIDMenu() {
+    public CariBarangByIDView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -102,15 +105,19 @@ public class CariBarangByIDMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cariBarangByIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBarangByIDButtonActionPerformed
-        BarangController bc = new BarangController();
-        String id = IDBarangTextField.getText();
-        boolean cari = bc.cariBarangByID(id);
-        if(cari){
-            AmbilBarangMenu ambil = new AmbilBarangMenu(id);
-            ambil.setVisible(true);
-            this.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null, "Maaf, barang dengan id yang Anda cari tidak ditemukan atau barang sudah diambil!", "Alert", WARNING_MESSAGE);
+        try {
+            BarangController bc = new BarangController();
+            String id = IDBarangTextField.getText();
+            boolean cari = bc.cariBarangByID(id);
+            if(cari){
+                AmbilBarangView ambil = new AmbilBarangView(id);
+                ambil.setVisible(true);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Maaf, barang dengan id yang Anda cari tidak ditemukan atau barang sudah diambil!", "Alert", WARNING_MESSAGE);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(CariBarangByIDView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_cariBarangByIDButtonActionPerformed
